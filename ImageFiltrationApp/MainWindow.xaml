@@ -1,0 +1,42 @@
+﻿<Window x:Class="ImageFiltrationApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Image processing" Height="720" Width="1024">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- Панель кнопок -->
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10" Visibility="Visible" x:Name="ButtonsPanel">
+                <Button Content="Загрузить изображение" Click="LoadImage_Click" Margin="0,0,10,0"/>
+                <Button Content="Сохранить изображение" Click="SaveImage_Click" Margin="0,0,10,0"/>
+                <Button Content="Увеличить резкость" Click="SharpenImage_Click" Margin="0,0,10,0"/>
+                <Button Content="Обрезать и изменить размер" Click="CropAndResize_Click" Margin="0,0,10,0"/>
+                <Button Content="Преобразовать в оттенки серого" Click="ConvertToGrayscale_Click" Margin="0,0,10,0"/>
+                <Button Content="Сгладить шумы" Click="SmoothNoise_Click"/>
+            </StackPanel>
+
+            <!-- Панель ввода координат (по умолчанию скрыта) -->
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10" Visibility="Collapsed" x:Name="CoordinateInputPanel">
+                <Label Content="Левый верхний угол X:" VerticalAlignment="Center"/>
+                <TextBox x:Name="LeftTopXTextBox" Width="50" Margin="5" TextChanged="LeftTopXTextBox_TextChanged"/>
+                <Label Content="Y:" VerticalAlignment="Center"/>
+                <TextBox x:Name="LeftTopYTextBox" Width="50" Margin="5" TextChanged="LeftTopYTextBox_TextChanged"/>
+
+                <Label Content="Правый нижний угол X:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBox x:Name="RightBottomXTextBox" Width="50" Margin="5" TextChanged="RightBottomXTextBox_TextChanged"/>
+                <Label Content="Y:" VerticalAlignment="Center"/>
+                <TextBox x:Name="RightBottomYTextBox" Width="50" Margin="5" TextChanged="RightBottomYTextBox_TextChanged"/>
+
+                <Button Content="Обрезать" Click="CropImage_Click" Margin="10,0,0,0"/>
+            </StackPanel>
+
+            
+            <Canvas x:Name="CanvasOverlay" Grid.Row="1" IsHitTestVisible="False">
+                <Image Name="ImageView" Grid.Row="1" Stretch="Uniform"/>
+                <Rectangle x:Name="CropRectangle" Stroke="Red" StrokeThickness="2" Visibility="Collapsed"/>
+            </Canvas>
+            
+        </Grid>
+</Window>
